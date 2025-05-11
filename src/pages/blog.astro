@@ -1,0 +1,31 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const allPosts = await Astro.glob("../pages/blog/*.md");
+const pageTitle = "Blogs";
+---
+
+<style>
+	li a {
+		display: flex;
+	}
+	h1 {
+		font-size: 1.5em;
+		font-weight: 700;
+	}
+</style>
+
+<BaseLayout pageTitle={pageTitle}>
+	<p>Blogs here</p>
+	<ul>
+		{
+			allPosts.map((post) => (
+				<li>
+					<a href={post.url}>
+						<h1>{post.frontmatter.title}</h1>
+						<div>{post.frontmatter.description}</div>
+					</a>
+				</li>
+			))
+		}
+	</ul>
+</BaseLayout>
